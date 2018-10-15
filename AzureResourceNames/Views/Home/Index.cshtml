@@ -1,0 +1,76 @@
+﻿@model AzureResourceNames.Models.NameViewModel
+
+@{
+    ViewData["Title"] = "Hopme";
+}
+
+<h2>Home</h2>
+
+<h4>Define Name Parts</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SelectedOrganization" class="control-label">Organization</label>
+                <select asp-for="SelectedOrganization" asp-items="Model.Organizations" class="form-control"></select>
+                <span asp-validation-for="SelectedOrganization" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedEnvironment" class="control-label">Environment</label>
+                <select asp-for="SelectedEnvironment" asp-items="Model.Environments" class="form-control"></select>
+                <span asp-validation-for="SelectedEnvironment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EnvironmentNumber" class="control-label">Environment Number</label>
+                <input asp-for="EnvironmentNumber" class="form-control" />
+                <span asp-validation-for="EnvironmentNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedRegion" class="control-label">Region</label>
+                <select asp-for="SelectedRegion" asp-items="Model.Regions" class="form-control"></select>
+                <span asp-validation-for="SelectedRegion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedPortfolio" class="control-label">Portfolio</label>
+                <select asp-for="SelectedPortfolio" asp-items="Model.Portfolios" class="form-control"></select>
+                <span asp-validation-for="SelectedPortfolio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppNameShort" class="control-label">App Name (Short)</label>
+                <input asp-for="AppNameShort" class="form-control" />
+                <span asp-validation-for="AppNameShort" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AppNameLong" class="control-label">App Name (Long)</label>
+                <input asp-for="AppNameLong" class="form-control" />
+                <span asp-validation-for="AppNameLong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedResourceType" class="control-label">Resource Type</label>
+                <select asp-for="SelectedResourceType" asp-items="Model.ResourceTypes" class="form-control"></select>
+                <span asp-validation-for="SelectedResourceType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Build Name(s)" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+@if (Model.ResourceNames != null && Model.ResourceNames.Any())
+{
+<hr />
+<div>
+    <ul>
+        @foreach (var name in Model.ResourceNames)
+        {
+            <li>@name</li>
+        }
+    </ul>
+</div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
